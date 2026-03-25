@@ -5,19 +5,23 @@
 }
 
 :root {
-  --color-bg: #f8f6f2;
+  --color-bg: #f4b34c; /* Orange matching the image background */
   --color-surface: #ffffff;
-  --color-text: #1a1a18;
-  --color-muted: #6b6b60;
-  --color-border: #e4e0d8;
-  --color-accent: #7a3b1e;
-  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
-    Arial, sans-serif;
+  --color-text: #691421; /* Maroon text for cards */
+  --color-text-on-bg: #ffffff; /* White text for content over orange */
+  --color-muted: #8a2938;
+  --color-border: #d49033; /* Darker orange for borders on bg */
+  --color-accent: #691421; /* Maroon for prices and accents */
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --font-serif: Georgia, "Times New Roman", serif;
 }
 
 html {
   background-color: var(--color-bg);
+  background-image: linear-gradient(rgba(244, 179, 76, 0.6), rgba(105, 20, 33, 0.4)), url('/bg.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
   color: var(--color-text);
   font-family: var(--font-sans);
   font-size: 16px;
@@ -32,4 +36,187 @@ body {
 h1, h2, h3 {
   line-height: 1.2;
   letter-spacing: -0.02em;
+}
+
+/* Layout */
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Header */
+.site-header {
+  background-color: var(--color-surface);
+  padding: 4rem 0 3rem;
+  border-bottom: 2px solid var(--color-border);
+  margin-bottom: 4rem;
+  text-align: center;
+}
+
+.site-eyebrow {
+  font-size: 0.85rem;
+  font-weight: bold;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin-bottom: 0.5rem;
+}
+
+.site-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: bold;
+  color: var(--color-text);
+  margin-bottom: 0.75rem;
+}
+
+.site-tagline {
+  font-size: 0.9rem;
+  font-weight: bold;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+/* Sections */
+.section {
+  margin-bottom: 4rem;
+}
+
+.section-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-text-on-bg);
+  margin-bottom: 2rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--color-border);
+}
+
+/* Menu cards */
+.menu-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 600px) {
+  .menu-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+}
+
+.menu-card {
+  background-color: var(--color-surface);
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.menu-card__header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.menu-card__name {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.menu-card__price {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.menu-card__description {
+  font-size: 0.95rem;
+  color: var(--color-muted);
+  line-height: 1.55;
+  font-weight: 500;
+}
+
+/* Article list */
+.articles-container {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.article-category-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--color-text-on-bg);
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.article-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 600px) {
+  .article-list {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.article-item {
+  padding: 1.25rem 1.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text);
+  background-color: var(--color-surface);
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.article-item__name {
+  flex-grow: 1;
+  line-height: 1.4;
+}
+
+.article-item__price {
+  font-weight: 700;
+  color: var(--color-accent);
+  white-space: nowrap;
+}
+
+/* Footer */
+.site-footer {
+  margin-top: 5rem;
+  padding: 3rem 0;
+  border-top: 2px solid var(--color-border);
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--color-text-on-bg);
+  font-weight: bold;
+}
+
+.site-footer p {
+  margin-bottom: 0.75rem;
+}
+.site-footer .copyright {
+  font-size: 0.85rem;
+  opacity: 0.8;
+  font-weight: normal;
 }

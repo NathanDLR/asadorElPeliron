@@ -32,7 +32,9 @@ const formatPrice = (price: number) =>
               <article class="menu-card">
                 <div class="menu-card__header">
                   <h3 class="menu-card__name">{menu.name}</h3>
-                  <span class="menu-card__price">{formatPrice(menu.price)}</span>
+                  <span class="menu-card__price">
+                    {formatPrice(menu.price)}
+                  </span>
                 </div>
                 <p class="menu-card__description">{menu.description}</p>
               </article>
@@ -44,166 +46,44 @@ const formatPrice = (price: number) =>
       <!-- Articles section -->
       <section class="section">
         <h2 class="section-title">Artículos</h2>
-        <ul class="article-list">
+        <div class="articles-container">
           {
-            articles.map((article) => (
-              <li class="article-item">{article.name}</li>
-            ))
+            Array.from(new Set(articles.map((a) => a.category))).map(
+              (category) => (
+                <div class="article-category-group">
+                  <h3 class="article-category-title">{category}</h3>
+                  <ul class="article-list">
+                    {articles
+                      .filter((a) => a.category === category)
+                      .map((article) => (
+                        <li class="article-item">
+                          <span class="article-item__name">{article.name}</span>
+                          {article.price && (
+                            <span class="article-item__price">
+                              {formatPrice(article.price)}
+                            </span>
+                          )}
+                        </li>
+                      ))}
+                  </ul>
+                </div>
+              ),
+            )
           }
-        </ul>
+        </div>
       </section>
     </main>
 
     <footer class="site-footer">
-      <div class="container">
-        <p>&copy; {new Date().getFullYear()} Asador El Pelirón</p>
+      <div class="container footer-info">
+        <p>
+          Ronda El Pelirón, 49, Jerez de la Frontera | Teléfono: 956 06 79 73
+        </p>
+        <p>Horario: Lunes a Domingo (Martes cerrado) de 09:00H a 16:00H</p>
+        <p class="copyright">
+          &copy; {new Date().getFullYear()} Asador El Pelirón
+        </p>
       </div>
     </footer>
   </body>
 </html>
-
-<style>
-  /* Layout */
-  .container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 0 1.5rem;
-  }
-
-  /* Header */
-  .site-header {
-    padding: 4rem 0 3rem;
-    border-bottom: 1px solid var(--color-border);
-    margin-bottom: 4rem;
-    text-align: center;
-  }
-
-  .site-eyebrow {
-    font-size: 0.75rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--color-muted);
-    margin-bottom: 0.5rem;
-  }
-
-  .site-title {
-    font-family: var(--font-serif);
-    font-size: clamp(2.5rem, 6vw, 4rem);
-    font-weight: 400;
-    color: var(--color-text);
-    margin-bottom: 0.75rem;
-  }
-
-  .site-tagline {
-    font-size: 0.8rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--color-muted);
-  }
-
-  /* Sections */
-  .section {
-    margin-bottom: 4rem;
-  }
-
-  .section-title {
-    font-size: 0.7rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--color-muted);
-    margin-bottom: 2rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 1px solid var(--color-border);
-  }
-
-  /* Menu cards */
-  .menu-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1px;
-    background-color: var(--color-border);
-    border: 1px solid var(--color-border);
-    border-radius: 6px;
-    overflow: hidden;
-  }
-
-  @media (min-width: 600px) {
-    .menu-grid {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-
-  .menu-card {
-    background-color: var(--color-surface);
-    padding: 1.75rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-
-  .menu-card__header {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 1rem;
-  }
-
-  .menu-card__name {
-    font-size: 1.05rem;
-    font-weight: 600;
-    color: var(--color-text);
-  }
-
-  .menu-card__price {
-    font-size: 1rem;
-    font-weight: 500;
-    color: var(--color-accent);
-    white-space: nowrap;
-    flex-shrink: 0;
-  }
-
-  .menu-card__description {
-    font-size: 0.875rem;
-    color: var(--color-muted);
-    line-height: 1.55;
-  }
-
-  /* Article list */
-  .article-list {
-    list-style: none;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 0;
-    border: 1px solid var(--color-border);
-    border-radius: 6px;
-    overflow: hidden;
-  }
-
-  @media (min-width: 600px) {
-    .article-list {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-
-  .article-item {
-    padding: 1rem 1.5rem;
-    font-size: 0.9rem;
-    color: var(--color-text);
-    border-bottom: 1px solid var(--color-border);
-    background-color: var(--color-surface);
-  }
-
-  .article-item:last-child {
-    border-bottom: none;
-  }
-
-  /* Footer */
-  .site-footer {
-    margin-top: 5rem;
-    padding: 2rem 0;
-    border-top: 1px solid var(--color-border);
-    text-align: center;
-    font-size: 0.8rem;
-    color: var(--color-muted);
-  }
-</style>
