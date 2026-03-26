@@ -1,0 +1,283 @@
+---
+// Define the image data for our carousel.
+// Each object contains the image path and alt text for accessibility.
+const images = [
+  { src: "/images/carousel/steak.png", alt: "Delicioso chuletón a la brasa" },
+  { src: "/images/carousel/salad.png", alt: "Auténtica ensaladilla rusa" },
+  { src: "/images/carousel/dessert.png", alt: "Tarta de queso casera" },
+];
+---
+
+<!-- Main wrapper for the entire carousel component -->
+<div class="carousel-wrapper">
+  <!-- The scrolling container that holds all image slides -->
+  <div class="carousel">
+    {
+      images.map((img) => (
+        <div class="carousel-slide">
+          <img src={img.src} alt={img.alt} loading="lazy" />
+        </div>
+      ))
+    }
+  </div>
+  <button class="carousel-btn prev-btn" aria-label="Anterior imagen">
+    <svg
+      width="24"
+      height="24"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M15 19l-7-7 7-7"></path>
+    </svg>
+  </button>
+  <button class="carousel-btn next-btn" aria-label="Siguiente imagen">
+    <svg
+      width="24"
+      height="24"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M9 5l7 7-7 7"></path>
+    </svg>
+  </button>
+  <!-- Little dot indicators at the bottom to show current slide -->
+  <div class="carousel-indicators">
+    {
+      images.map((_, i) => (
+        <button
+          class={`indicator ${i === 0 ? "active" : ""}`}
+          data-index={i}
+          aria-label={`Ir a la imagen ${i + 1}`}
+        />
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .carousel-wrapper {
+    position: relative;
+    max-width: 100%;
+    margin: 0 auto;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    /* Adding a warm border to match the theme */
+    border: 3px solid var(--color-surface);
+  }
+
+  /* Native CSS Scroll Snapping for smooth, performant horizontal sliding */
+  .carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .carousel::-webkit-scrollbar {
+    display: none;
+  }
+
+  .carousel-slide {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+    aspect-ratio: 16/9;
+    position: relative;
+  }
+
+  .carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Navigation Buttons */
+  .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.85);
+    color: var(--color-text);
+    border: none;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+  }
+
+  .carousel-btn:hover {
+    background: var(--color-surface);
+    transform: translateY(-50%) scale(1.1);
+    color: var(--color-accent);
+  }
+
+  .prev-btn {
+    left: 1rem;
+  }
+  .next-btn {
+    right: 1rem;
+  }
+
+  /* Indicators */
+  .carousel-indicators {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0.5rem;
+    z-index: 10;
+  }
+
+  .indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+    padding: 0;
+    transition: all 0.3s ease;
+  }
+
+  .indicator.active,
+  .indicator:hover {
+    background: var(--color-surface);
+    transform: scale(1.2);
+  }
+
+  /* Responsive styling */
+  @media (max-width: 600px) {
+    .carousel-btn {
+      width: 36px;
+      height: 36px;
+    }
+    .prev-btn {
+      left: 0.5rem;
+    }
+    .next-btn {
+      right: 0.5rem;
+    }
+  }
+</style>
+
+<script>
+  function initCarousel() {
+    const wrapper = document.querySelector(".carousel-wrapper");
+    if (!wrapper) return;
+
+    // Grab all necessary DOM elements
+    const carousel = wrapper.querySelector(".carousel") as HTMLElement;
+    const prevBtn = wrapper.querySelector(".prev-btn") as HTMLButtonElement;
+    const nextBtn = wrapper.querySelector(".next-btn") as HTMLButtonElement;
+    const indicators = wrapper.querySelectorAll(".indicator");
+    const slides = wrapper.querySelectorAll(".carousel-slide");
+
+    if (!carousel || slides.length === 0) return;
+
+    let currentIndex = 0;
+
+    const updateIndicators = (index: number) => {
+      indicators.forEach((ind, i) => {
+        if (i === index) ind.classList.add("active");
+        else ind.classList.remove("active");
+      });
+    };
+
+    // Helper function to programmatically scroll to a specific slide
+    const scrollToSlide = (index: number) => {
+      if (index < 0 || index >= slides.length) return;
+      currentIndex = index;
+      const slidePos = (slides[index] as HTMLElement).offsetLeft;
+
+      carousel.scrollTo({
+        left: slidePos,
+        behavior: "smooth",
+      });
+      updateIndicators(currentIndex);
+    };
+
+    // Wire up the previous and next buttons
+    prevBtn?.addEventListener("click", () => {
+      currentIndex = currentIndex > 0 ? currentIndex - 1 : slides.length - 1;
+      scrollToSlide(currentIndex);
+    });
+
+    nextBtn?.addEventListener("click", () => {
+      currentIndex = currentIndex < slides.length - 1 ? currentIndex + 1 : 0;
+      scrollToSlide(currentIndex);
+    });
+
+    indicators.forEach((indicator, index) => {
+      indicator.addEventListener("click", () => {
+        scrollToSlide(index);
+      });
+    });
+
+    // Update index on scroll (debounce for better performance)
+    let scrollTimeout: any;
+    carousel.addEventListener("scroll", () => {
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        const slideWidth = (slides[0] as HTMLElement).clientWidth;
+        const scrollPos = carousel.scrollLeft;
+        // Adding half a slide width to trigger change when half scrolled
+        const newIndex = Math.floor((scrollPos + slideWidth / 2) / slideWidth);
+        if (
+          newIndex !== currentIndex &&
+          newIndex >= 0 &&
+          newIndex < slides.length
+        ) {
+          currentIndex = newIndex;
+          updateIndicators(currentIndex);
+        }
+      }, 50);
+    });
+
+    // Auto-play functionality
+    let autoplayInterval: any;
+
+    const startAutoplay = () => {
+      clearInterval(autoplayInterval);
+      autoplayInterval = setInterval(() => {
+        if (nextBtn) nextBtn.click();
+      }, 8000);
+    };
+
+    const stopAutoplay = () => {
+      clearInterval(autoplayInterval);
+    };
+
+    startAutoplay();
+
+    // Pause auto-play on hover or touch
+    wrapper.addEventListener("mouseenter", stopAutoplay);
+    wrapper.addEventListener("mouseleave", startAutoplay);
+    wrapper.addEventListener("touchstart", stopAutoplay, { passive: true });
+    wrapper.addEventListener("touchend", startAutoplay, { passive: true });
+  }
+
+  // Setup on initial load and view transitions (if Astro ViewTransitions are used)
+  document.addEventListener("astro:page-load", initCarousel);
+  // Also run on DOMContentLoaded for normal loads
+  document.addEventListener("DOMContentLoaded", initCarousel);
+</script>

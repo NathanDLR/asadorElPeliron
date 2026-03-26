@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import { menus, articles } from "../data/menu";
+import Carousel from "../components/Carousel.astro";
 
 const formatPrice = (price: number) =>
   price.toLocaleString("es-ES", { style: "currency", currency: "EUR" });
@@ -23,9 +24,15 @@ const formatPrice = (price: number) =>
     </header>
 
     <main class="container">
+      <!-- Carousel section -->
+      <section class="section" style="margin-top: 2rem;">
+        <h2 class="section-title">Nuestros Productos</h2>
+        <Carousel />
+      </section>
+
       <!-- Menus section -->
       <section class="section">
-        <h2 class="section-title">Menús</h2>
+        <h2 class="section-title"><i>Menús</i></h2>
         <div class="menu-grid">
           {
             menus.map((menu) => (
@@ -45,7 +52,7 @@ const formatPrice = (price: number) =>
 
       <!-- Articles section -->
       <section class="section">
-        <h2 class="section-title">Artículos</h2>
+        <h2 class="section-title"><i>Artículos</i></h2>
         <div class="articles-container">
           {
             Array.from(new Set(articles.map((a) => a.category))).map(

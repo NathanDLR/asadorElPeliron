@@ -1,24 +1,31 @@
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
 :root {
-  --color-bg: #f4b34c; /* Orange matching the image background */
+  --color-bg: #f4b34c;
+  /* Orange matching the image background */
   --color-surface: #ffffff;
-  --color-text: #691421; /* Maroon text for cards */
-  --color-text-on-bg: #ffffff; /* White text for content over orange */
+  --color-text: #691421;
+  /* Maroon text for cards */
+  --color-text-on-bg: #ffffff;
+  /* White text for content over orange */
   --color-muted: #8a2938;
-  --color-border: #d49033; /* Darker orange for borders on bg */
-  --color-accent: #691421; /* Maroon for prices and accents */
+  --color-border: #d49033;
+  /* Darker orange for borders on bg */
+  --color-accent: #691421;
+  /* Maroon for prices and accents */
   --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --font-serif: Georgia, "Times New Roman", serif;
 }
 
 html {
   background-color: var(--color-bg);
-  background-image: linear-gradient(rgba(244, 179, 76, 0.6), rgba(105, 20, 33, 0.4)), url('/bg.png');
+  background-image: linear-gradient(rgba(244, 179, 76, 0.6), rgba(105, 20, 33, 0.4)), url('/wood-background.png');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -33,7 +40,9 @@ body {
   min-height: 100vh;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   line-height: 1.2;
   letter-spacing: -0.02em;
 }
@@ -115,8 +124,9 @@ h1, h2, h3 {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  border-radius: 12px;
+  border-radius: 24px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 3px dashed #691421;
 }
 
 .menu-card__header {
@@ -215,6 +225,7 @@ h1, h2, h3 {
 .site-footer p {
   margin-bottom: 0.75rem;
 }
+
 .site-footer .copyright {
   font-size: 0.85rem;
   opacity: 0.8;

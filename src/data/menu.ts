@@ -23,27 +23,27 @@ export const menus: Menu[] = [
   },
   {
     name: "Oferta Nº2",
-    description: "Pollo Asado + Elegir entre: Tortilla de patatas / Aliño / 1/4 Empanados + Elegir entre: 1/4 Croquetas de jamón / Tarrina de patatas mediana + Aceitunas, pan o picos.",
+    description: "Pollo Asado + Elegir entre: Tortilla de patatas ó Aliño ó 1/4 Empanados + Elegir entre: 1/4 Croquetas de jamón ó Tarrina de patatas mediana + Aceitunas, pan o picos.",
     price: 19.5,
   },
   {
     name: "Oferta Nº3 - Menú Familiar",
-    description: "Pollo Asado + Tarrina de patatas grande + 1/4 Empanados + 1/4 Croquetas de jamón + Refresco 2L o Cerveza 1L",
+    description: "Pollo Asado + Tarrina de patatas grande + Elegir entre: 1/4 Empanados ó Aliño ó Tortilla + 1/4 Croquetas de jamón + Refresco 2L o Cerveza 1L",
     price: 23.5,
   },
   {
     name: "Oferta 2 Pollos",
-    description: "2 POLLOS ASADOS",
+    description: "2 Pollos Asados",
     price: 23.5,
   },
   {
     name: "Oferta Sin Pollo",
-    description: "Tortilla, Tarrina de aliño, 1/4 Empanados, Aceitunas / Pan / Picos",
+    description: "Tortilla + Aliño + 1/4 Empanados + Elegir entre: Aceitunas ó Pan ó Picos",
     price: 14.0,
   },
   {
     name: "Super Oferta",
-    description: "2 POLLOS ASADOS, Tarrina de patatas grande, 1/4 Filetes empanados, Tarrina de aliño, Tortilla, Refresco 2L / Cerveza 1L",
+    description: "2 Pollos Asados + Tarrina de patatas grande + 1/4 de empanados + Aliño + Tortilla + Refresco 2L ó Cerveza 1L",
     price: 39.50,
   },
   {
@@ -53,8 +53,8 @@ export const menus: Menu[] = [
   },
   {
     name: "Oferta Campera",
-    description: "Pollo Asado, 1/4 Empanados, 1 Tortilla, Refresco 2L ó Cerveza 1L",
-    price: 22.5,
+    description: "Pollo Asado + 1/4 Empanados + 1 Tortilla + Refresco 2L ó Cerveza 1L",
+    price: 21.5,
   },
 ];
 
