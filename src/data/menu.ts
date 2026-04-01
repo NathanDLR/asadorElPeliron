@@ -37,6 +37,11 @@ export const menus: Menu[] = [
     price: 23.5,
   },
   {
+    name: "Oferta Medio Pollo",
+    description: "1/2 Pollo Asado con patatas dentro + Lata de refresco 33cl + Elegir entre: Aceitunas ó Pan ó Picos",
+    price: 10.5,
+  },
+  {
     name: "Oferta Sin Pollo",
     description: "Tortilla + Aliño + 1/4 Empanados + Elegir entre: Aceitunas ó Pan ó Picos",
     price: 14.0,
@@ -75,7 +80,7 @@ export const articles: Article[] = [
   { name: "Tortilla Normal", price: 5.5, category: "TORTILLAS" },
   { name: "Tortilla Pimiento y cebolla", price: 6.0, category: "TORTILLAS" },
   { name: "Tortilla Chistorra", price: 6.0, category: "TORTILLAS" },
-  { name: "Tortilla Campera", price: 7.0, category: "TORTILLAS" },
+  { name: "Tortilla Campera", price: 6.5, category: "TORTILLAS" },
 
   // Empanados
   { name: "1/4 Croquetas caseras", price: 4.5, category: "EMPANADOS" },
@@ -102,7 +107,7 @@ export const articles: Article[] = [
   { name: "Botella de refresco 2L", price: 2.5, category: "BEBIDAS" },
   { name: "Botella de agua 1.5L", price: 1.2, category: "BEBIDAS" },
   { name: "Botella de agua 0.5L", price: 0.5, category: "BEBIDAS" },
-  { name: "Cerveza 1L", price: 1.8, category: "BEBIDAS" },
+  { name: "Cerveza 1L", price: 2.2, category: "BEBIDAS" },
 
   // Complementos
   { name: "Aceitunas", price: 1.2, category: "COMPLEMENTOS" },

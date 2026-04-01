@@ -25,7 +25,7 @@
 
 html {
   background-color: var(--color-bg);
-  background-image: linear-gradient(rgba(244, 179, 76, 0.6), rgba(105, 20, 33, 0.4)), url('/wood-background.png');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.15)), url('/bg-minimalist.png');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -243,4 +243,11 @@ h3 {
   font-size: 0.85rem;
   opacity: 0.8;
   font-weight: normal;
+}
+
+.site-footer a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
 }
